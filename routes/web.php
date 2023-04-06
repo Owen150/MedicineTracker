@@ -8,6 +8,7 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FacilityProductController;
 use App\Http\Controllers\FinancialYearController;
 use App\Http\Controllers\InvoiceProformaController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManufacturersController;
 use App\Http\Controllers\PurchaseOrderController;
@@ -86,6 +87,8 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
     Route::resource('purchase-order-detail', PurchaseOrderDetailController::class);
     Route::get('/purchase-order-details/{id}/edit', [PurchaseOrderDetailController::class, 'editPurchase'])->name('editPurchase');
     Route::post('/purchase-order-details/{id}', [PurchaseOrderDetailController::class, 'updatePurchase'])->name('updatePurchase');
+
+    Route:post('/search', [PosController::class, 'searchProducts']);
 
     Route::get('/pos', function() {
         return view('pos');

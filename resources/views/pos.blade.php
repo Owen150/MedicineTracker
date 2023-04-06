@@ -65,7 +65,7 @@
                 </select>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="" id="" class="form-control">
+                    <input type="text" name="search" id="search" class="form-control">
                 </div>
             </div>
         </div>
@@ -244,6 +244,44 @@
     </div>
 </div>
 @endsection
+
+<script>
+    $('#search').keyup(function(){
+        var g = $(this).val().toLowerCase();
+        var data = new FormData;
+        data.append('_token','{{ csrf_token() }}');
+        data.append('search', g);
+        
+
+        $.ajax({
+            type: "POST",
+            url: "/products/{{$product->id}}",
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: data,
+            error: function (err) {
+              $('#danger').show();
+                console.log(err)
+            },
+            success: function (response) {
+              if(response == 1) {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                $('#success').show('slow');
+
+                setTimeout(changeLoc, 1500);
+
+              } else {
+                  $('#danger').show();
+
+              }
+              
+                        
+            }
+        });
+    });
+</script>
 
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
