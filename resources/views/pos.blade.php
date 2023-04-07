@@ -65,7 +65,7 @@
                 </select>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="search" id="search" class="form-control">
+                    <input type="search" name="search" id="search" placeholder="Search" class="form-control">
                 </div>
             </div>
         </div>
@@ -245,8 +245,10 @@
 </div>
 @endsection
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-<script>
+
+<script type="text/javascript">
     $('#search').keyup(function(){
         var g = $(this).val().toLowerCase();
         var data = new FormData;
@@ -255,8 +257,8 @@
         
 
         $.ajax({
-            type: "POST",
-            url: "/search/",
+            type: 'get',
+            url: '{{ URL::to('search') }}',
             processData: false,
             contentType: false,
             cache: false,

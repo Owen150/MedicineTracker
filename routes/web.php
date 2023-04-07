@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
     Route::get('/purchase-order-details/{id}/edit', [PurchaseOrderDetailController::class, 'editPurchase'])->name('editPurchase');
     Route::post('/purchase-order-details/{id}', [PurchaseOrderDetailController::class, 'updatePurchase'])->name('updatePurchase');
 
-    Route::post('/search', [PosController::class, 'searchProducts']);
+    Route::get('/search', [PosController::class, 'searchProducts']);
 
     Route::get('/pos', function() {
         return view('pos');

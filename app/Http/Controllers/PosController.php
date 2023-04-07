@@ -18,9 +18,7 @@ class PosController extends Controller
     }
 
     public function searchProducts(Request $request){
-        if (request('search')){
-            $products = Product::where('product_name', 'like','%'.request('search').'%')->get();
-        } 
+        $products = Product::where('product_name', 'Like','%'.$request->search.'%')->get();
         return response($products);
     }
 }
