@@ -58,107 +58,37 @@
 
         <!-- top search bar -->
         <div class="search-bar mb-3">
-            <div class="row">
-                <div class="col-md-6">
-                    <select name="product" class="js-example-basic-single form-select" data-width="100%">
-                        <option value="">Select Medicine</option>
-                </select>
-                </div>
-                <div class="col-md-6">
-                    <input type="search" name="search" id="search" placeholder="Search" class="form-control">
-                </div>
-            </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <select name="product" class="js-example-basic-single form-select" data-width="100%">
+                      <option value="">Select Medicine</option>
+              </select>
+              </div>
+              <div class="col-md-6">
+                  <input type="search" name="search" id="search" placeholder="Search" class="form-control">
+              </div>
+          </div>
         </div>
-
+        
         <!-- product catalogue -->
         <div class="product-catalogue">
             <div class="row">
                 <!--- col for each product --->
-                <div class="col-md-4 mb-2">
+                @foreach ($products as $product)
+                  <div class="col-md-4 mb-2">
                     <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
                         <div class="item-image position-relative overflow-hidden">
                             <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
                         </div>
                         <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">Napa(500)</h6>
+                            <h6 class="item-details-title">{{ $product->product_name }}</h6>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-4 mb-2">
-                    <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
-                        <div class="item-image position-relative overflow-hidden">
-                            <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">Napa(500)</h6>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 mb-2">
-                    <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
-                        <div class="item-image position-relative overflow-hidden">
-                            <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">Napa(500)</h6>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 mb-2">
-                    <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
-                        <div class="item-image position-relative overflow-hidden">
-                            <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">Napa(500)</h6>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 mb-2">
-                    <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
-                        <div class="item-image position-relative overflow-hidden">
-                            <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">Napa(500)</h6>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 mb-2">
-                    <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
-                        <div class="item-image position-relative overflow-hidden">
-                            <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">Napa(500)</h6>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 mb-2">
-                    <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
-                        <div class="item-image position-relative overflow-hidden">
-                            <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">Napa(500)</h6>
-                        </div>
-                    </div>
-                </div>
-                
-                
+                  </div>
+                @endforeach                
             </div>
         </div>
+        
     </div>
 
     <div class="col-md-8" style="background: #fff;border-radius:0.25rem">
@@ -257,11 +187,8 @@
         
 
         $.ajax({
-            type: 'get',
-            url: '{{ URL::to('search') }}',
-            processData: false,
-            contentType: false,
-            cache: false,
+            type: 'GET',
+            url: '/search',
             data: data,
             error: function (err) {
               $('#danger').show();
@@ -269,18 +196,11 @@
             },
             success: function (response) {
               if(response == 1) {
-                $("html, body").animate({ scrollTop: 0 }, "slow");
-
-                $('#success').show('slow');
-
-                setTimeout(changeLoc, 1500);
-
+                alert(response);
+                console.log(response);
               } else {
                   $('#danger').show();
-
-              }
-              
-                        
+              }                
             }
         });
     });

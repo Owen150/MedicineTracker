@@ -90,8 +90,7 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
 
     Route::get('/search', [PosController::class, 'searchProducts']);
 
-    Route::get('/pos', function() {
-        return view('pos');
-    });
+    Route::get('/pos',[PosController::class, 'index']);
+
 });
 Auth::routes();
