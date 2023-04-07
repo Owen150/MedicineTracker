@@ -13,10 +13,9 @@ class PosController extends Controller
         return view('pos', compact('products'));
     }
 
-
     public function searchProducts(Request $request)
     {
-        $products = Product::where('product_name', 'Like', '%' . $request->search . '%')->get();
+        $products = Product::where('product_name', 'like', '%' . $request->search . '%')->get();
         return response($products);
     }
 }

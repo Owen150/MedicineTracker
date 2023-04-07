@@ -49,43 +49,43 @@
 
           <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Product Name</label>
-            <input type="text" name="product_name" class="form-control" placeholder="product name" required>
+            <input type="text" name="product_name" class="form-control" placeholder="Product Name" required>
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Manufacturers</label>
-            <input type="text" name="manufacturers" class="form-control" placeholder="manufacturers" required>
+            <input type="text" name="manufacturers" class="form-control" placeholder="Manufacturer Name" required>
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Strength</label>
-            <input type="number" name="strength" class="form-control" placeholder="strength" required>
+            <input type="number" name="strength" class="form-control" placeholder="Strength" required>
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Unit of Measure</label>
-            <input type="text" name="unit_of_measure" class="form-control" placeholder="unit of measure" required>
+            <input type="text" name="unit_of_measure" class="form-control" placeholder="Unit of Measure" required>
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Package Size</label>
-            <input type="text" name="package_size" class="form-control" placeholder="package size" required>
+            <input type="text" name="package_size" class="form-control" placeholder="Package Size" required>
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Package Quantity</label>
-            <input type="number" name="package_quantity" class="form-control" placeholder="package quantity" required>
+            <input type="number" name="package_quantity" class="form-control" placeholder="Package Quantity" required>
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Number of Items in Box</label>
-            <input type="number" name="no_of_items_in_box" class="form-control" placeholder="Items in box" required>
+            <input type="number" name="no_of_items_in_box" class="form-control" placeholder="Quantity in Box" required>
           </div>
 
         </div>
 
         <div>
-          <button type="submit" class="btn btn-primary mt-3">Create Product</button>
+          <button type="submit" class="btn btn-success mt-3">Add Product</button>
         </div>
         </form>
 

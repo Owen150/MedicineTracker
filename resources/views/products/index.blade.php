@@ -18,20 +18,6 @@
     display: flex;
     flex-direction: row-reverse;
   }
-
-  .my-td {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-  }
-
-  #product-delete {
-    color: rgb(235, 2, 2);
-  }
-
-  #product-delete:hover {
-    cursor: pointer;
-  }
   </style>
 @endpush
 
@@ -55,7 +41,12 @@
       <div class="card-body">
         <h6 class="card-title">Products Table</h6>
         <div class="table-responsive">
-          <table id="dataTableExample" class="table table-bordered table-striped mt-3">
+
+          @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+          @endif
+            
+          <table class="table table-bordered table-hover mt-3" id="dataTableExample" >
             <thead>
               <tr>
                 <th>#</th>
@@ -85,16 +76,14 @@
                     <td>{{ $product->package_quantity }}</td>
                     <td>{{ $product->no_of_items_in_box }}</td>
                     <td>{{ App\Models\Category::where('id','=', $product->category_id)->first()->category_name }}</td>
-                    <td class="my-td">
-                      
-                        <a class="text-success"  href="{{ route('products.edit', $product->id) }}">Edit</a>
+                    <td style="display: flex; gap: 10px">
+                        <a href="{{ route('products.edit', $product->id) }}"><span class="text-success">Edit</span></a>
                         <form id='frm'
                          action="{{ route('products.destroy',$product->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <span id="product-delete">Delete</span>
+                            <span id="product-delete" class="text-danger">Delete</span>
                         </form>
-                      
                     </td>
                 </tr>
                 @endforeach
@@ -105,6 +94,7 @@
     </div>
   </div>
 </div>
+
 
 @endsection
 

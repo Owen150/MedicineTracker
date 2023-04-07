@@ -192,15 +192,11 @@
             data: data,
             error: function (err) {
               $('#danger').show();
-                console.log(err)
+                console.log(err);
             },
             success: function (response) {
-              if(response == 1) {
-                alert(response);
-                console.log(response);
-              } else {
-                  $('#danger').show();
-              }                
+                alert('response');
+                console.log(response);             
             }
         });
     });
