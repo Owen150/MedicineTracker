@@ -87,6 +87,10 @@
                   </div>
                 @endforeach                
             </div>
+
+            <div id="content">
+              
+            </div>
         </div>
         
     </div>
@@ -179,24 +183,21 @@
 
 
 <script type="text/javascript">
-    $('#search').keyup(function(){
-        var g = $(this).val().toLowerCase();
-        var data = new FormData;
-        data.append('_token','{{ csrf_token() }}');
-        data.append('search', g);
+    $('#search').on('keyup', function(){
+        $value = $(this).val();
         
-
         $.ajax({
-            type: 'GET',
+            type: 'get',
             url: '/search',
-            data: data,
+            data: {'search':$value},
+            
+            success: function (data) {
+                console.log(data);
+                $('#content').html(data);            
+            },
             error: function (err) {
               $('#danger').show();
                 console.log(err);
-            },
-            success: function (response) {
-                alert('response');
-                console.log(response);             
             }
         });
     });
