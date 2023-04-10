@@ -65,7 +65,9 @@
               </select>
               </div>
               <div class="col-md-6">
-                  <input type="search" name="search" id="search" placeholder="Search" class="form-control">
+                  <div class="search">
+                    <input type="search" name="search" id="search" placeholder="Search Product" class="form-control">
+                  </div>
               </div>
           </div>
         </div>
@@ -88,8 +90,9 @@
                 @endforeach                
             </div>
 
-            <div id="content">
-              
+            <!--- col for search result --->
+            <div class="row">
+              <div class="col-md-4 mb-2" id="content"></div>
             </div>
         </div>
         
@@ -181,23 +184,18 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-
 <script type="text/javascript">
     $('#search').on('keyup', function(){
         $value = $(this).val();
-        
+                
         $.ajax({
             type: 'get',
             url: '/search',
             data: {'search':$value},
             
-            success: function (data) {
-                console.log(data);
-                $('#content').html(data);            
-            },
-            error: function (err) {
-              $('#danger').show();
-                console.log(err);
+            success: function(data){
+              console.log(data);
+              $('#content').html(data);            
             }
         });
     });

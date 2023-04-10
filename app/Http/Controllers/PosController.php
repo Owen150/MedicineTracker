@@ -13,15 +13,15 @@ class PosController extends Controller
         return view('pos', compact('products'));
     }
 
-    public function searchProducts(Request $request)
+    public function search(Request $request)
     {
         $output = "";
         $products = Product::where('product_name', 'Like', '%' . $request->search . '%')->get();
         foreach ($products as $product) {
             $output .=
-                '<tr>
-                    <td>' . $product->product_name . '</td>
-                </tr>';
+                '<div>
+                    ' . $product->product_name . '
+                </div>';
         }
 
         return response($output);
