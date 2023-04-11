@@ -193,33 +193,32 @@
     });
 
     function getAllProducts(){
+      $('#searchResult').html('');
+
       $.ajax({
       type: "get",
       url: '/pos-products',
       processData: false,
       contentType: false, 
       cache: false,
-      
+      error: function (err) {
+            console.log(err)
+        },
       success: function(response){
         console.log(response);
         $('#searchResult').append(response);           
       }
-    });
+      });
     } 
-     getAllProducts();
+    getAllProducts();
 
-    $('#search').on('keyup', function(){
+    $('#search').on('input', function(){
 
         var inputSearch = $(this).val().toLowerCase();
         var data = new FormData;
         data.append('_token','{{ csrf_token() }}');
         data.append('search', inputSearch);
 
-        if(inputSearch == ''){
-          $('#searchResult').html('');
-          getAllProducts();
-        }
-        else{
           $.ajax({
             type: "POST",
             url: '/search',
@@ -230,11 +229,10 @@
             
             success: function(response){
               console.log(response);
-              $('#searchResult div').remove();
+              $('#searchResult').html('');
               $('#searchResult').append(response);           
             }
           }); 
-        }        
     });
 
     function addProductToTable(th){
