@@ -66,7 +66,7 @@
               </div>
               <div class="col-md-6">
                   <div class="search">
-                    <input type="search" name="search" id="search" placeholder="Search Product" class="form-control">
+                    <input id="search" type="search" name="_token" class="form-control" placeholder="Search Product">
                   </div>
               </div>
           </div>
@@ -74,7 +74,7 @@
         
         <!-- product catalogue -->
         <div class="product-catalogue">
-            <div class="row">
+            <div class="row" id="">
                 <!--- col for each product --->
                 @foreach ($products as $product)
                   <div class="col-md-4 mb-2">
@@ -92,7 +92,7 @@
 
             <!--- col for search result --->
             <div class="row">
-              <div class="col-md-4 mb-2" id="content"></div>
+              <div class="col-md-4 mb-2" id="searchResult"></div>
             </div>
         </div>
         
@@ -186,18 +186,27 @@
 
 <script type="text/javascript">
     $('#search').on('keyup', function(){
-        $value = $(this).val();
-                
-        $.ajax({
-            type: 'get',
+
+        $inputSearch = $(this).val().toLowerCase();
+        var data = new FormData;
+        data.append('_token','{{ csrf_token() }}');
+        data.append('search', $inputSearch);
+
+        if($inputSearch == ''){
+          $('#searchResult').html('');
+          $('#searchResult').hide();
+        }
+        else{
+          $.ajax({
+            type: "POST",
             url: '/search',
-            data: {'search':$value},
+            data: data,
             
             success: function(data){
-              console.log(data);
-              $('#content').html(data);            
+              console.log(data);            
             }
-        });
+          }); 
+        }        
     });
 </script>
 
