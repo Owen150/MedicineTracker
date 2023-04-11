@@ -66,7 +66,7 @@
               </div>
               <div class="col-md-6">
                   <div class="search">
-                    <input id="search" type="search" name="_token" class="form-control" placeholder="Search Product">
+                    <input id="search" type="search" name="search" class="form-control" placeholder="Search Product">
                   </div>
               </div>
           </div>
@@ -74,25 +74,9 @@
         
         <!-- product catalogue -->
         <div class="product-catalogue">
-            <div class="row" id="">
+            <div class="row" id="searchResult">
                 <!--- col for each product --->
-                @foreach ($products as $product)
-                  <div class="col-md-4 mb-2">
-                    <div class="product-panel bg-white overflow-hidden border-0 shadow-sm">
-                        <div class="item-image position-relative overflow-hidden">
-                            <img src="https://pharmacaredemo.bdtask-demo.com/pharmacare-9.4_demo/assets/dist/img/products/1613648757_2610e132926e221ae6a4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="panel-footer border-0 bg-white p-3">
-                            <h6 class="item-details-title">{{ $product->product_name }}</h6>
-                        </div>
-                    </div>
-                  </div>
-                @endforeach                
-            </div>
-
-            <!--- col for search result --->
-            <div class="row">
-              <div class="col-md-4 mb-2" id="searchResult"></div>
+                                
             </div>
         </div>
         
@@ -182,34 +166,6 @@
 </div>
 @endsection
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
-<script type="text/javascript">
-    $('#search').on('keyup', function(){
-
-        $inputSearch = $(this).val().toLowerCase();
-        var data = new FormData;
-        data.append('_token','{{ csrf_token() }}');
-        data.append('search', $inputSearch);
-
-        if($inputSearch == ''){
-          $('#searchResult').html('');
-          $('#searchResult').hide();
-        }
-        else{
-          $.ajax({
-            type: "POST",
-            url: '/search',
-            data: data,
-            
-            success: function(data){
-              console.log(data);            
-            }
-          }); 
-        }        
-    });
-</script>
-
 
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
@@ -235,5 +191,58 @@
         body.toggleClass('sidebar-open');
       }
     });
+
+    function getAllProducts(){
+      $.ajax({
+      type: "get",
+      url: '/pos-products',
+      processData: false,
+      contentType: false, 
+      cache: false,
+      
+      success: function(response){
+        console.log(response);
+        $('#searchResult').append(response);           
+      }
+    });
+    } 
+     getAllProducts();
+
+    $('#search').on('keyup', function(){
+
+        var inputSearch = $(this).val().toLowerCase();
+        var data = new FormData;
+        data.append('_token','{{ csrf_token() }}');
+        data.append('search', inputSearch);
+
+        if(inputSearch == ''){
+          $('#searchResult').html('');
+          getAllProducts();
+        }
+        else{
+          $.ajax({
+            type: "POST",
+            url: '/search',
+            processData: false,
+            contentType: false, 
+            cache: false,
+            data: data,
+            
+            success: function(response){
+              console.log(response);
+              $('#searchResult div').remove();
+              $('#searchResult').append(response);           
+            }
+          }); 
+        }        
+    });
+
+    function addProductToTable(th){
+      var price = $(th).attr("data-price")-0;
+      var name = $(th).attr("data-name");
+      var availableQuantity = $(th).attr("data-available")-0;
+    }
+  
     </script>
+
 @endpush

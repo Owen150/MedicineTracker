@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
     Route::post('/purchase-order-details/{id}', [PurchaseOrderDetailController::class, 'updatePurchase'])->name('updatePurchase');
 
     Route::get('/pos', [PosController::class, 'index']);
-    Route::get('/search', [PosController::class, 'search']);
+    Route::post('/search', [PosController::class, 'search']);
+    Route::get('/pos-products', [PosController::class, 'posAllProducts']);
 });
 Auth::routes();
