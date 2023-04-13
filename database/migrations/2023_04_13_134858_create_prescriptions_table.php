@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
+            $table->integer('patient_number');
+            $table->string('patient_name');
+            $table->string('prescription_date')->nullable();
+            $table->string('prescription_cost')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Prescription');
+        Schema::dropIfExists('prescriptions');
     }
 };

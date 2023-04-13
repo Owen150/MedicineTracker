@@ -15,7 +15,14 @@ return new class extends Migration
     {
         Schema::create('prescription_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('product_id');
+            $table->string('patient_address');
+            $table->string('doctor');
             $table->timestamps();
+            
+            $table->foreign('order_id')->references('id')->on('prescriptions');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -26,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PrescriptionDetails');
+        Schema::dropIfExists('prescription_details');
     }
 };
