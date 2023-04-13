@@ -141,6 +141,13 @@
           <span class="link-title">Drawing Rights</span>
         </a>
       </li>
+
+      <li class="nav-item {{ active_class(['prescription']) }}">
+        <a href="{{ route('prescription.index') }}" class="nav-link">
+          <ion-icon class="link-icon" name="file-tray-full-outline"></ion-icon>
+          <span class="link-title">Prescriptions</span>
+        </a>
+      </li>
       
       <li class="nav-item nav-category"></li>
       {{---

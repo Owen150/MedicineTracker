@@ -9,6 +9,7 @@ use App\Http\Controllers\FacilityProductController;
 use App\Http\Controllers\FinancialYearController;
 use App\Http\Controllers\InvoiceProformaController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManufacturersController;
 use App\Http\Controllers\PurchaseOrderController;
@@ -91,5 +92,8 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
     Route::get('/pos', [PosController::class, 'index']);
     Route::post('/search', [PosController::class, 'search']);
     Route::get('/pos-products', [PosController::class, 'posAllProducts']);
+
+    Route::resource('prescription', PrescriptionController::class);
+
 });
 Auth::routes();
