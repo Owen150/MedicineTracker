@@ -48,6 +48,27 @@
             </div>
 
             <div class="col-md-6">
+              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Patient Address</label>
+              <input type="text" name="patient_address" value="{{ $prescription->patient_address }}" class="form-control" id="" placeholder="" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Doctor</label>
+              <input type="text" name="doctor" value="{{ $prescription->doctor }}" class="form-control" id="" placeholder="" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Product</label>
+              <select class="form-select" name="product_id" id="products">
+                  @foreach ($products as $product)
+                  <option @if ($product->id == $prescription->product_id)
+                      selected
+                  @endif value="{{ $product->id }}">{{ $product->product_name }}</option>
+                  @endforeach
+              </select>            
+          </div>
+
+            <div class="col-md-6">
               <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Prescription Date</label>
               <input type="text" name="prescription_date" value="{{ $prescription->prescription_date }}" class="form-control" id="" placeholder="" required>
             </div>

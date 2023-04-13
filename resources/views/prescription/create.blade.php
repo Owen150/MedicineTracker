@@ -58,7 +58,7 @@
 
           <div class="col-md-6">
             <div class="form-group">
-              <label for="exampleInputUsername2">Product</label>
+              <label for="exampleInputUsername2">Product Name</label>
               <select class="form-select" name="product_id" id="">
                   @foreach ($products as $product)
                   <option value="{{ $product->id }}">{{ $product->product_name }}</option>

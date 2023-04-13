@@ -25,7 +25,7 @@
 <nav class="mynav page-breadcrumb">
   <ol class="breadcrumb" style="flex-none">
     <li class="breadcrumb-item"><a href="{{ route('prescription.index') }}">Prescriptions</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Prescriptions Table</li>
+    <li class="breadcrumb-item active" aria-current="page">Prescription Details</li>
   </ol>
 
   <div class="cancel">
@@ -39,7 +39,7 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h6 class="card-title">Prescriptions Table</h6>
+        <h6 class="card-title">Prescription Details</h6>
         <div class="table-responsive">
 
           @if (session('success'))
@@ -54,7 +54,7 @@
                 <th>Patient Name</th>
                 <th>Patient Address</th>
                 <th>Doctor</th>
-                <th>Products</th>
+                <th>Product Name</th>
                 <th>Prescription Date</th>
                 <th>Prescription Cost</th>
                 <th>Action</th>

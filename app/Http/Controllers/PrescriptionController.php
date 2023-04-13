@@ -79,10 +79,10 @@ class PrescriptionController extends Controller
      * @param  \App\Models\Prescription  $prescription
      * @return \Illuminate\Http\Response
      */
-    public function edit(Prescription $prescription)
+    public function edit($id)
     {
         $products = Product::all();
-        $prescription = Prescription::find($prescription);
+        $prescription = Prescription::find($id);
         return view('prescription.edit')->with([
             'products' => $products,
             'prescription' => $prescription,
@@ -96,10 +96,10 @@ class PrescriptionController extends Controller
      * @param  \App\Models\Prescription  $prescription
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prescription $prescription)
+    public function update(Request $request, $id)
     {
         $request->validate([]);
-        $prescription = Prescription::find($prescription);
+        $prescription = Prescription::find($id);
         $prescription->update($request->all());
         return redirect()->route('prescription.index')
             ->with('success', 'Prescription Updated Successfully');
@@ -111,9 +111,9 @@ class PrescriptionController extends Controller
      * @param  \App\Models\Prescription  $prescription
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prescription $prescription)
+    public function destroy($id)
     {
-        $prescription = Prescription::find($prescription);
+        $prescription = Prescription::find($id);
         $prescription->delete();
         return redirect()->route('prescription.index')
             ->with('success', 'Prescription Deleted Successfully');

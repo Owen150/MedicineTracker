@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('prescription_date')->nullable();
             $table->string('prescription_cost')->nullable();
             $table->timestamps();
-
             $table->foreign('product_id')->references('id')->on('products');
         });
     }
