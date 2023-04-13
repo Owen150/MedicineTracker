@@ -19,8 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('patient_address');
             $table->string('doctor');
-            $table->timestamps();
-            
+            $table->timestamps();   
             $table->foreign('order_id')->references('id')->on('prescriptions');
             $table->foreign('product_id')->references('id')->on('products');
         });

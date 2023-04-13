@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prescription;
 use App\Models\PrescriptionDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -15,9 +16,10 @@ class PrescriptionDetailsController extends Controller
      */
     public function index()
     {
-        $prescriptionDetails = PrescriptionDetail::all();
         $products = Product::all();
-        return view('prescription-details.index', compact(['prescriptionDetails', 'products']));
+        $prescription = Prescription::all();
+        $prescriptionDetails = PrescriptionDetail::all();
+        return view('prescription-details.index', compact(['products', 'prescription', 'prescriptionDetails']));
     }
 
     /**
