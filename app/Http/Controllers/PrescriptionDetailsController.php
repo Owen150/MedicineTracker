@@ -16,10 +16,9 @@ class PrescriptionDetailsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
         $prescription = Prescription::all();
-        $prescriptionDetails = PrescriptionDetail::all();
-        return view('prescription-details.index', compact(['products', 'prescription', 'prescriptionDetails']));
+        $prescriptionDetails = PrescriptionDetail::orderBy('created_at', 'desc')->get();
+        return view('prescription-details.index', compact(['prescription', 'prescriptionDetails']));
     }
 
     /**
