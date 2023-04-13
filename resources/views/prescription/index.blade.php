@@ -52,6 +52,9 @@
                 <th>#</th>
                 <th>Patient Number</th>
                 <th>Patient Name</th>
+                <th>Patient Address</th>
+                <th>Doctor</th>
+                <th>Products</th>
                 <th>Prescription Date</th>
                 <th>Prescription Cost</th>
                 <th>Action</th>
@@ -66,6 +69,9 @@
                     <?php $number++; ?>
                     <td>{{ $prescription->patient_number }}</td>
                     <td>{{ $prescription->patient_name }}</td>
+                    <td>{{ $prescription->patient_address }}</td>
+                    <td>{{ $prescription->doctor }}</td>
+                    <td>{{ App\Models\Product::where('id','=', $prescription->product_id)->first()->product_name }}</td>
                     <td>{{ $prescription->prescription_date }}</td>
                     <td>{{ $prescription->prescription_cost }}</td>
                     <td style="display: flex; gap: 10px">

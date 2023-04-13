@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
     Route::get('/pos-products', [PosController::class, 'posAllProducts']);
 
     Route::resource('prescription', PrescriptionController::class);
-
+    Route::resource('prescription-details', PrescriptionDetailsController::class);
+    
 });
 Auth::routes();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prescription;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,11 @@ class PrescriptionController extends Controller
      */
     public function create()
     {
+        $products = Product::all();
         $users = User::all();
         return view('prescription.create')->with([
-            'users' => $users,
+            'products' => $products,
+            'users' => $users
         ]);
     }
 
@@ -41,8 +44,11 @@ class PrescriptionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'product_id' => 'required',
             'patient_number' => 'required',
             'patient_name' => 'required',
+            'patient_address' => 'required',
+            'doctor' => 'required',
             'prescription_date' => 'required',
             'prescription_cost' => 'required',
         ]);
@@ -59,9 +65,12 @@ class PrescriptionController extends Controller
      * @param  \App\Models\Prescription  $prescription
      * @return \Illuminate\Http\Response
      */
-    public function show(Prescription $prescription)
+    public function show($id)
     {
-        return view('prescription.show', compact('prescription'));
+        $prescription = Prescription::find($id);
+        return view('prescription.show')->with([
+            'prescription' => $prescription
+        ]);
     }
 
     /**
@@ -72,7 +81,12 @@ class PrescriptionController extends Controller
      */
     public function edit(Prescription $prescription)
     {
-        return view('prescription.edit', compact('prescription'));
+        $products = Product::all();
+        $prescription = Prescription::find($prescription);
+        return view('prescription.edit')->with([
+            'products' => $products,
+            'prescription' => $prescription,
+        ]);
     }
 
     /**
@@ -85,9 +99,8 @@ class PrescriptionController extends Controller
     public function update(Request $request, Prescription $prescription)
     {
         $request->validate([]);
-
+        $prescription = Prescription::find($prescription);
         $prescription->update($request->all());
-
         return redirect()->route('prescription.index')
             ->with('success', 'Prescription Updated Successfully');
     }
@@ -100,8 +113,8 @@ class PrescriptionController extends Controller
      */
     public function destroy(Prescription $prescription)
     {
+        $prescription = Prescription::find($prescription);
         $prescription->delete();
-
         return redirect()->route('prescription.index')
             ->with('success', 'Prescription Deleted Successfully');
     }

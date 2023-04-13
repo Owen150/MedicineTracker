@@ -47,6 +47,27 @@
           </div>
 
           <div class="col-md-6 mb-3">
+            <label for="exampleInputUsername2">Patient Address</label>
+            <input type="text" name="patient_address" class="form-control" placeholder="Enter Patient Address" required>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="exampleInputUsername2">Doctor</label>
+            <input type="text" name="doctor" class="form-control" placeholder="Enter Doctor Name" required>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputUsername2">Product</label>
+              <select class="form-select" name="product_id" id="">
+                  @foreach ($products as $product)
+                  <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                  @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
             <label for="exampleInputUsername2">Prescription Date</label>
             <input type="text" name="prescription_date" class="form-control" placeholder="Enter Prescription Date">
           </div>
