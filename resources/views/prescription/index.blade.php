@@ -77,15 +77,13 @@
                     <td style="display: flex; gap: 10px">
                         <!-- Button trigger modal --> 
                         <a href="{{ route('prescription.show', $prescription->id) }}"><span class="text-success">Show</span></a>
-                        <!--
-                        <a href="{{ route('prescription.edit', $prescription->id) }}"><span class="text-success">Edit</span></a>
+                        <a href="{{ route('prescription.edit', $prescription->id) }}"><span class="text-primary">Edit</span></a>
                         <form id='frm'
                          action="{{ route('prescription.destroy',$prescription->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <span id="prescription-delete" class="text-danger">Delete</span>
                         </form>
-                        -->
                     </td>
                 </tr>
                 @endforeach

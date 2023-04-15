@@ -18,12 +18,12 @@
 @section('content')
 <nav class="page-breadcrumb my-nav">
   <ol class="breadcrumb" style="width: 100%">
-    <li class="breadcrumb-item"><a href="#">Special pages</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Invoice</li>
+    <li class="breadcrumb-item"><a href="#">Prescription Products</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Products</li>
   </ol>
 
   <div class="cancel-btn">
-    <a href="{{route('purchase-order.index')}}" class="btn btn-danger">back <ion-icon  style="position: relative; font-size: 15px; top: 2.5px" name="caret-back-circle-outline"></ion-icon></a>
+    <a href="{{route('prescription.index')}}" class="btn btn-danger">Back <ion-icon  style="position: relative; font-size: 15px; top: 2.5px" name="caret-back-circle-outline"></ion-icon></a>
   </div>
 </nav>
 
