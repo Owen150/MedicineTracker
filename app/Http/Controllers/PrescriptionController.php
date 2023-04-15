@@ -17,7 +17,8 @@ class PrescriptionController extends Controller
     public function index()
     {
         $prescriptions = Prescription::orderBy('created_at', 'desc')->get();
-        return view('prescription.index', compact('prescriptions'));
+        $products = Product::all();
+        return view('prescription.index', compact('prescriptions','products'));
     }
 
     /**
@@ -68,9 +69,7 @@ class PrescriptionController extends Controller
     public function show($id)
     {
         $prescription = Prescription::find($id);
-        return view('prescription.show')->with([
-            'prescription' => $prescription
-        ]);
+        return view('prescription.show', compact('prescription'));
     }
 
     /**
