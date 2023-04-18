@@ -76,7 +76,7 @@
                     <td>{{ $prescription->prescription_cost }}</td>
                     <td style="display: flex; gap: 10px">
                         <!-- Button trigger modal --> 
-                        <a href="{{ route('prescription.show', $prescription->id) }}"><span class="text-success">Show</span></a>
+                        <a href="{{ route('prescription.show', $prescription->id) }}" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $prescription->id }}"><span class="text-success">Show</span></a>
                         <a href="{{ route('prescription.edit', $prescription->id) }}"><span class="text-primary">Edit</span></a>
                         <form id='frm'
                          action="{{ route('prescription.destroy',$prescription->id) }}" method="post">
@@ -95,48 +95,52 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-      <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Prescription Products</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="table-responsive">
-          <table id="dataTableExample" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Package Size</th>
-                <th>Package Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $number = 1; ?>
-                                    
-              @foreach ($prescriptions as $prescription)
-              <tr>
-                <td>{{ $number }}</td>
-                <td>{{ App\Models\Product::where('id','=', $prescription->product_id)->first()->product_name }}</td>
-                <td>{{ App\Models\Product::where('id','=', $prescription->product_id)->first()->price }}</td>
-                <td>{{ App\Models\Product::where('id','=', $prescription->product_id)->first()->package_size }}</td>
-                <td>{{ App\Models\Product::where('id','=', $prescription->product_id)->first()->package_quantity }}</td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+  @foreach ($prescriptions as $prescription)
+  <div class="modal fade" id="exampleModal{{ $prescription->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Prescription Products</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
         </div>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-      </div>
-  </div>
-  </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table id="dataTableExample" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Product Name</th>
+                      <th>Product Price</th>
+                      <th>Package Size</th>
+                      <th>Package Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @php
+                        $details = App\Models\PrescriptionDetail::where('order_id', '=', $prescription->id)->get();
+                        var_dump($details);
+                    @endphp
+                      @foreach ($details as $detail )
+                      <tr>
+                        <td>{{  App\Models\Product::where('id','=', $prescription->product_id)->first()->product_name  }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      @endforeach
+                    
+
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+    </div>
+@endforeach
+
 
 </div>
 

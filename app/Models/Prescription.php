@@ -17,4 +17,8 @@ class Prescription extends Model
         'prescription_date',
         'prescription_cost'
     ];
+
+    public function prescriptionDetails(){
+        return $this->belongsTo(PrescriptionDetail::class, 'order_id');
+    }
 }
