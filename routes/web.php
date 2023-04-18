@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductManufacturersController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SupplierProductCatalogueController;
 use App\Http\Controllers\SupplierProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Facility;
@@ -96,6 +97,7 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
 
     Route::resource('prescription', PrescriptionController::class);
     Route::resource('prescription-details', PrescriptionDetailsController::class);
-    
+
+    Route::resource('supplier-product-catalogue', SupplierProductCatalogueController::class);
 });
 Auth::routes();
