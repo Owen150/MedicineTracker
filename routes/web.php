@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManufacturersController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseOrderDetailController;
+use App\Http\Controllers\SubcountyController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierProductCatalogueController;
 use App\Http\Controllers\SupplierProductController;
@@ -102,6 +103,6 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
     Route::resource('supplier-product-catalogue', SupplierProductCatalogueController::class);
 
     Route::resource('counties', CountyController::class);
-
+    Route::resource('subcounties', SubcountyController::class);
 });
 Auth::routes();
