@@ -3,6 +3,7 @@
 use App\Http\Controllers\AllocatedBudgetController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryTypeController;
+use App\Http\Controllers\CountyController;
 use App\Http\Controllers\DrawingRightController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FacilityProductController;
@@ -99,5 +100,8 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
     Route::resource('prescription-details', PrescriptionDetailsController::class);
 
     Route::resource('supplier-product-catalogue', SupplierProductCatalogueController::class);
+
+    Route::resource('counties', CountyController::class);
+
 });
 Auth::routes();
