@@ -15,9 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->paginate(5);
-        return view('categories.index', compact('categories'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        $types = CategoryType::all();
+        return view('categories.index', compact('categories', 'types'));
     }
 
     /**
@@ -28,11 +28,12 @@ class CategoryController extends Controller
     public function create()
     {
         $types = CategoryType::all();
-
         if ($types->isEmpty()) {
             return redirect()->route('categories.index')->with('unsuccess', 'Please add category types!');
         }
-        return view('categories.create')->with('types',$types);
+        return view('categories.create')->with([
+            'types' => $types
+        ]);
     }
 
     /**
@@ -43,16 +44,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'category_name' => 'required',
             'type_id' => 'required'
         ]);
 
         Category::create($request->all());
-
         return redirect()->route('categories.index')
-            ->with('success', 'Category created successfully');
+            ->with('success', 'Category Created Successfully');
     }
 
     /**
@@ -63,7 +63,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('categories.show', compact('category'));
+        //
     }
 
     /**
@@ -72,12 +72,13 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         $types = CategoryType::all();
+        $category = Category::find($id);
         return view('categories.edit')->with([
-            'category' => $category,
-            'types' => $types
+            'types' => $types,
+            'category' => $category
         ]);
     }
 
@@ -88,16 +89,13 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'type' => 'required'
-        ]);
-
+        $request->validate([]);
+        $category = Category::find($id);
         $category->update($request->all());
-
         return redirect()->route('categories.index')
-            ->with('success', 'Category updated successfully');
+            ->with('success', 'Category Updated Successfully');
     }
 
     /**
@@ -106,11 +104,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $category = Category::find($id);
         $category->delete();
-
         return redirect()->route('categories.index')
-            ->with('Success', 'Category deleted successfully');
+            ->with('success', 'Category Deleted Successfully');
     }
 }
