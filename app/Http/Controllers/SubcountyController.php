@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\County;
 use App\Models\Subcounty;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class SubcountyController extends Controller
      */
     public function index()
     {
-        //
+        $subcounties = Subcounty::all();
+        return view('subcounties.index', compact('subcounties'));
     }
 
     /**
@@ -24,7 +26,10 @@ class SubcountyController extends Controller
      */
     public function create()
     {
-        //
+        $counties = County::all();
+        return view('subcounties.create')->with([
+            'counties' => $counties
+        ]);
     }
 
     /**
@@ -35,7 +40,15 @@ class SubcountyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'county_id' => 'required',
+            'constituency_name' => 'required',
+            'ward' => 'required'
+        ]);
+
+        Subcounty::create($request->all());
+        return redirect()->route('subcounties.index')
+            ->with('success', 'Sub-county Created Successfully');
     }
 
     /**
