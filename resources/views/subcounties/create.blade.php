@@ -51,7 +51,7 @@
                 </div>
             </div>
         <div>
-            <button type="submit" class="btn btn-success mt-3">Add Constituency</button>
+            <button type="submit" class="btn btn-success mt-3">Add Sub-county</button>
         </div>
         </form>
 

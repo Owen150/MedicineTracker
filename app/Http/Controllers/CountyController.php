@@ -42,7 +42,7 @@ class CountyController extends Controller
 
         County::create($request->all());
         return redirect()->route('counties.index')
-            ->with('success', 'County Created Successfully');
+            ->with('success', 'County Added Successfully');
     }
 
     /**
@@ -97,7 +97,7 @@ class CountyController extends Controller
     public function destroy(Request $request, $id)
     {
         $county = County::find($id);
-        $county->delete($id);
+        $county->delete();
         $county->update($request->all());
         return redirect()->route('counties.index')
             ->with('success', 'County Deleted Successfully');

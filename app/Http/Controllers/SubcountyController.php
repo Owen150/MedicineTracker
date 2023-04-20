@@ -48,7 +48,7 @@ class SubcountyController extends Controller
 
         Subcounty::create($request->all());
         return redirect()->route('subcounties.index')
-            ->with('success', 'Sub-county Created Successfully');
+            ->with('success', 'Sub-county Added Successfully');
     }
 
     /**
@@ -68,9 +68,14 @@ class SubcountyController extends Controller
      * @param  \App\Models\Subcounty  $subcounty
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subcounty $subcounty)
+    public function edit($id)
     {
-        //
+        $counties = County::all();
+        $subcounty = Subcounty::find($id);
+        return view('subcounties.edit')->with([
+            'counties' => $counties,
+            'subcounty' => $subcounty
+        ]);
     }
 
     /**
@@ -80,9 +85,14 @@ class SubcountyController extends Controller
      * @param  \App\Models\Subcounty  $subcounty
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subcounty $subcounty)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([]);
+        $subcounty = Subcounty::find($id);
+        $subcounty->update($request->all());
+
+        return redirect()->route('subcounties.index')
+            ->with('success', 'Sub-county Updated Successfully');
     }
 
     /**
@@ -91,8 +101,11 @@ class SubcountyController extends Controller
      * @param  \App\Models\Subcounty  $subcounty
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subcounty $subcounty)
+    public function destroy($id)
     {
-        //
+        $subcounty = Subcounty::find($id);
+        $subcounty->delete();
+        return redirect()->route('subcounties.index')
+        ->with('success', 'Sub-county Deleted Successfully');
     }
 }

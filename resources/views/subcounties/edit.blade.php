@@ -16,41 +16,46 @@
 @section('content')
 <nav class="mynav page-breadcrumb">
   <ol class="breadcrumb" style="flex-none">
-    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+    <li class="breadcrumb-item"><a href="{{ route('subcounties.index') }}">Sub-counties</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Sub-county</li>
   </ol>
-
   <div class="cancel">
     <div></div>
-    <a href="{{route('products.index')}}"><button class="btn btn-danger mb-1 mb-md-0">Cancel</button></a>
+    <a href="{{route('subcounties.index')}}"><button class="btn btn-danger mb-1 mb-md-0">Cancel</button></a>
   </div>
 </nav>
 
 <div class="col-md-12">
     <div class="card">
         <div class="card-body">
-        <h3 class="card-title">Edit Product</h3>
-        <form action="{{ route('products.update', $product->id) }}" method="POST">
+        <h3 class="card-title">Edit Sub-county</h3>
+        <form action="{{ route('subcounties.update', $subcounty->id) }}" method="POST">
             @csrf
             @method('PUT')
-
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Product Name</label>
-                    <input type="text" name="product_name" value="{{ $product->product_name }}" class="form-control" id="categoryName" placeholder="">
+                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">County ID</label>
+                    <select class="form-select" name="county_id" id="counties">
+                        @foreach ($counties as $county)
+                        <option @if ($county->id == $subcounty->county_id)
+                            selected
+                        @endif value="{{ $county->id }}">{{ $county->id }}</option>
+                        @endforeach
+                    </select>            
                 </div>
-
                 <div class="col-md-6">
-                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Manufacturer</label>
-                    <input type="text" name="manufacturers" value="{{ $product->manufacturers }}" class="form-control" id="categoryName" placeholder="">
+                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Constituency Name</label>
+                    <input type="text" name="constituency_name" value="{{ $subcounty->constituency_name }}" class="form-control" id="categoryName" placeholder="">
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Ward</label>
+                    <input type="text" name="ward" value="{{ $subcounty->ward }}" class="form-control" id="categoryName" placeholder="">
                 </div>
             </div>
-            
             <div>
-                <button type="submit" class="btn btn-success mt-2">Update Product</button>
+                <button type="submit" class="btn btn-success mt-2">Update Sub-county</button>
             </div>
         </form>
-
         </div>
     </div>
 </div>
