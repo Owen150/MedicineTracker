@@ -155,6 +155,13 @@
           <span class="link-title">Supplier Product Catalogue</span>
         </a>
       </li>
+
+      <li class="nav-item {{ active_class(['counties']) }}">
+        <a href="{{ route('counties.index') }}" class="nav-link">
+          <ion-icon class="link-icon" name="file-tray-full-outline"></ion-icon>
+          <span class="link-title">Counties</span>
+        </a>
+      </li>
       
       <li class="nav-item nav-category"></li>
       {{---

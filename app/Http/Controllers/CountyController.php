@@ -94,10 +94,11 @@ class CountyController extends Controller
      * @param  \App\Models\County  $county
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $county = County::find($id);
-        $county->delete();
+        $county->delete($id);
+        $county->update($request->all());
         return redirect()->route('counties.index')
             ->with('success', 'County Deleted Successfully');
     }
