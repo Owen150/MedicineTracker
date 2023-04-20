@@ -30,8 +30,8 @@
   </ol>
 
   <div class="btn-div">
-    <button type="button" class="btn btn-warning mb-1 mb-md-0">Import Excel</button>
-    <button type="button" class="btn btn-success mb-1 mb-md-0">Export Excel</button>     
+    <button type="button" class="btn btn-warning mb-1 mb-md-0" data-bs-toggle="modal" data-bs-target="#receiveModal">Import Excel</button>
+    <button type="button" class="btn btn-success mb-1 mb-md-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Export Excel</button>     
   </div>
 </nav>
 
@@ -75,7 +75,53 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select Supplier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <form action="{{route('excel_suppliers')}}" method="post">
+          @csrf
+        <label for="role" class="form-label">Select Supplier</label>
+        <select class="form-select" name="supplier" id="supplier" required>
+          @foreach ($suppliers as $supplier)
+            <option  value="{{$supplier->id}}">{{$supplier->name}}</option>
+          @endforeach
+        </select>        
+        <button id="download-excel" type="submit" class="btn btn-success mt-2">Download Excel</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
 
+<div class="modal fade" id="receiveModal" tabindex="-1" aria-labelledby="receiveModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="receiveModalLabel">Select Supplier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <form action="" method="post" enctype="multipart/form-data">
+          @csrf
+        <label for="role" class="form-label">Upload supplier product excel file</label>
+        
+        <input type="file" id="myDropify" name="supplier_product"/><br>
+        
+        <button  type="submit" class="btn btn-success mt-2">Import Excel</button>
+      </form>
+      </div>
+    
+    </div>
+  </div>
+</div>
 @endsection
 
 @push('plugin-scripts')
