@@ -21,6 +21,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierProductCatalogueController;
 use App\Http\Controllers\SupplierProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WardController;
 use App\Models\Facility;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -104,5 +105,6 @@ Route::group(['middleware' => ['auth', 'twofactor']], function () {
 
     Route::resource('counties', CountyController::class);
     Route::resource('subcounties', SubcountyController::class);
+    Route::resource('wards', WardController::class);
 });
 Auth::routes();

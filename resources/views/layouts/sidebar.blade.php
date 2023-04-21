@@ -169,6 +169,13 @@
           <span class="link-title">Sub-counties</span>
         </a>
       </li>
+
+      <li class="nav-item {{ active_class(['wards']) }}">
+        <a href="{{ route('wards.index') }}" class="nav-link">
+          <ion-icon class="link-icon" name="file-tray-full-outline"></ion-icon>
+          <span class="link-title">Wards</span>
+        </a>
+      </li>
       
       <li class="nav-item nav-category"></li>
       {{---
