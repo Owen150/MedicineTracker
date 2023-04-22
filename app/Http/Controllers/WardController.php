@@ -33,7 +33,7 @@ class WardController extends Controller
             'counties' => $counties,
             'subcounties' => $subcounties
         ]);
-    }    
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -79,7 +79,8 @@ class WardController extends Controller
         $ward = Ward::find($id);
         return view('wards.edit')->with([
             'counties' => $counties,
-            'subcounties' => $subcounties
+            'subcounties' => $subcounties,
+            'ward' => $ward
         ]);
     }
 

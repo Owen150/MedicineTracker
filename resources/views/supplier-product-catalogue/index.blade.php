@@ -111,9 +111,9 @@
       <div class="modal-body">
         <form action="" method="post" enctype="multipart/form-data">
           @csrf
-        <label for="role" class="form-label">Upload supplier product excel file</label>
+        <label for="role" class="form-label">Upload supplier product catalog excel file</label>
         
-        <input type="file" id="myDropify" name="supplier_product"/><br>
+        <input type="file" id="myDropify" name="supplier_product"/>
         
         <button  type="submit" class="btn btn-success mt-2">Import Excel</button>
       </form>
@@ -127,6 +127,8 @@
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
   <script src="{{ asset('assets/plugins/datatables-net-bs5/dataTables.bootstrap5.js') }}"></script>
+  <script src="{{ asset('assets/plugins/dropify/js/dropify.min.js') }}"></script>
+  <script src="{{ asset('assets/js/dropify.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
