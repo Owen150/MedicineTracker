@@ -494,7 +494,11 @@
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
   <script>
     $(window).on('load', function() {
-      $('#myModal').modal('show');
+      var is_modal_show = sessionStorage.getItem('alreadyShow');
+      if(is_modal_show != 'alredy shown'){
+        $('#myModal').modal('show');
+        sessionStorage.setItem('alreadyShow','alredy shown');
+      }
     });
   </script>
 @endpush
